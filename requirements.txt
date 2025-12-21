@@ -1,0 +1,6 @@
+onnxruntime-gpu
+opencv-python
+pillow
+huggingface_hub
+numpy
+pywin32

@@ -1,0 +1,28 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Virtual Environment
+venv/
+.venv/
+wd14_env/
+Scripts/
+Lib/
+Include/
+pyvenv.cfg
+
+# ONNX models cache (downloaded from HuggingFace)
+*.onnx
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+Thumbs.db
+.DS_Store
+
+# Personal scripts (gitignore)
+run_kingc.bat
