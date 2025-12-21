@@ -1,6 +1,7 @@
-onnxruntime-gpu
-opencv-python
-pillow
-huggingface_hub
-numpy
-pywin32
+onnxruntime-gpu==1.16.3
+opencv-python==4.8.1.78
+pillow==10.1.0
+huggingface_hub==0.19.4
+numpy==1.24.3
+pywin32==306
+tqdm==4.66.1

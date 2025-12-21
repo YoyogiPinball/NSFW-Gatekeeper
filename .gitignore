@@ -26,3 +26,9 @@ Thumbs.db
 
 # Personal scripts (gitignore)
 run_kingc.bat
+
+# Generated files
+logs/
+.processed.json
+*.csv
+DEVNOTES.md
