@@ -20,15 +20,105 @@ WD-ViT-tagger-v3 と JoyTag の2つのモデルを使用して、画像のNSFW�
 
 ## 必要環境
 
-- Python 3.8+
+- **Python 3.11 - 3.13** （推奨: 3.12）
+  - ⚠️ Python 3.14は現時点でonnxruntimeが未対応のため使用不可
+  - Python 3.10以前は非推奨
 - CUDA対応GPU（推奨、CPUでも動作可）
 - 6GB+ VRAM（バッチサイズ4〜8推奨）
 
 ## インストール
 
+### 1. Pythonバージョンの確認
+
 ```bash
-pip install -r requirements.txt
+# インストール済みのPythonバージョンを確認（Windows）
+py --list
+
+# インストール済みのPythonバージョンを確認（Linux/macOS）
+python3 --version
 ```
+
+Python 3.11〜3.13がインストールされていることを確認してください。
+
+### 2. 仮想環境の作成
+
+**Windows (PowerShell):**
+```powershell
+# プロジェクトディレクトリに移動
+cd path\to\nsfw-gatekeeper
+
+# Python 3.12で仮想環境を作成
+py -3.12 -m venv wd14_env
+
+# 仮想環境をアクティベート
+.\wd14_env\Scripts\Activate.ps1
+```
+
+**Linux/macOS:**
+```bash
+# プロジェクトディレクトリに移動
+cd path/to/nsfw-gatekeeper
+
+# 仮想環境を作成
+python3.12 -m venv wd14_env
+
+# 仮想環境をアクティベート
+source wd14_env/bin/activate
+```
+
+### 3. 依存パッケージのインストール
+
+仮想環境がアクティブな状態で（プロンプトに `(wd14_env)` が表示されている状態）：
+
+```bash
+# pipを最新版にアップグレード
+python -m pip install --upgrade pip
+
+# 依存パッケージをインストール
+python -m pip install -r requirements.txt
+```
+
+インストールには数分かかる場合があります。
+
+## 起動方法
+
+### 初回起動時
+
+仮想環境をアクティベートしてから実行します。
+
+**Windows (PowerShell):**
+```powershell
+# 仮想環境をアクティベート
+.\wd14_env\Scripts\Activate.ps1
+
+# プログラムを実行
+python batch_tagger.py <入力ディレクトリ>
+```
+
+**Linux/macOS:**
+```bash
+# 仮想環境をアクティベート
+source wd14_env/bin/activate
+
+# プログラムを実行
+python batch_tagger.py <入力ディレクトリ>
+```
+
+### 2回目以降
+
+毎回、仮想環境のアクティベートが必要です。
+
+**便利なTips（Windows）:**
+個人用のバッチファイルを作成しておくと便利です：
+
+```bat
+@echo off
+call .\wd14_env\Scripts\activate
+python batch_tagger.py D:\your\image\folder -o D:\your\image\folder -b 8
+pause
+```
+
+このファイルを `.gitignore` に追加すれば、個人設定がGitにコミットされません。
 
 ## 使い方
 
@@ -119,6 +209,70 @@ CSVには以下の情報が含まれます：
 - `--skip-processed` 使用時は `.processed.json` で処理済みファイルを管理
 - ドライランモードではファイル操作は行われません（判定のみ）
 
+## トラブルシューティング
+
+### ❌ ModuleNotFoundError: No module named 'cv2'
+
+**原因:** 仮想環境がアクティベートされていないか、依存パッケージがインストールされていません。
+
+**解決方法:**
+```powershell
+# 仮想環境をアクティベート
+.\wd14_env\Scripts\Activate.ps1
+
+# 依存パッケージを再インストール
+python -m pip install -r requirements.txt
+```
+
+---
+
+### ❌ ERROR: No matching distribution found for onnxruntime-gpu
+
+**原因:** Python 3.14など、新しすぎるPythonバージョンを使用しています。
+
+**解決方法:**
+```powershell
+# Python 3.12で仮想環境を作り直す
+deactivate
+Remove-Item -Recurse -Force .\wd14_env
+py -3.12 -m venv wd14_env
+.\wd14_env\Scripts\Activate.ps1
+python -m pip install -r requirements.txt
+```
+
+---
+
+### ❌ Fatal error in launcher: Unable to create process
+
+**原因:** 古い仮想環境のパスが残っている、または仮想環境が破損しています。
+
+**解決方法:**
+```powershell
+# 仮想環境を削除して作り直す
+deactivate
+Remove-Item -Recurse -Force .\wd14_env
+py -3.12 -m venv wd14_env
+.\wd14_env\Scripts\Activate.ps1
+python -m pip install -r requirements.txt
+```
+
+---
+
+### 💡 その他のヒント
+
+- **プロンプトに `(wd14_env)` が表示されない場合:** 仮想環境がアクティベートされていません
+- **処理が途中で止まる場合:** `--skip-processed` オプションで再開できます
+- **GPU メモリ不足の場合:** `--batch-size 2` または `--device cpu` を試してください
+- **ログを確認したい場合:** `logs/` フォルダ内のログファイルを参照
+
+---
+
 ## バージョン
 
-v1.0.0
+**v1.0.1** (2025-12-22)
+- requirements.txt バージョン更新（Python 3.12対応）
+- インストール・起動手順を詳細化
+- トラブルシューティングセクション追加
+
+**v1.0.0** (2025-12-22)
+- 初回リリース
