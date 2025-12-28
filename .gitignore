@@ -32,3 +32,8 @@ logs/
 .processed.json
 *.csv
 DEVNOTES.md
+
+# Claude Code Harness (development files)
+.claude/
+.claude-code-harness/
+.claude-code-harness-version
