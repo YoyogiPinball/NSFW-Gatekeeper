@@ -1,5 +1,9 @@
 # NSFW Gatekeeper
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Python 3.11+](https://img.shields.io/badge/python-3.11%2B-blue.svg)](https://www.python.org/downloads/)
+[![GitHub stars](https://img.shields.io/github/stars/YoyogiPinball/NSFW-Gatekeeper.svg?style=social&label=Star)](https://github.com/YoyogiPinball/NSFW-Gatekeeper)
+
 大量画像のNSFW判定とフォルダ振り分けツール（GPU並列バッチ処理対応）
 
 ## 概要
@@ -35,6 +39,16 @@ WD-ViT-tagger-v3 と JoyTag の2つのモデルを使用して、画像のNSFW�
 - 6GB+ VRAM（バッチサイズ4〜8推奨）
 
 ## インストール
+
+### 0. リポジトリのクローン
+
+```bash
+# リポジトリをクローン
+git clone https://github.com/YoyogiPinball/NSFW-Gatekeeper.git
+
+# ディレクトリに移動
+cd NSFW-Gatekeeper
+```
 
 ### 1. Pythonバージョンの確認
 

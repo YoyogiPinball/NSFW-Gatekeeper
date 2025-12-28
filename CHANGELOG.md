@@ -5,6 +5,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Changed
+- README.md にバッジとgit cloneセクションを追加
+- 改行コードをLFに統一（クロスプラットフォーム対応）
+- .gitignore に開発用ファイル（.claude/等）を追加
+
+### Released
+- GitHub で公開リポジトリとして公開（2025-12-28）
+
 ## [1.0.1] - 2025-12-22
 
 ### Changed
