@@ -531,6 +531,8 @@ def main():
                         help='判定結果をCSVファイルに出力（例: --csv-output results.csv）')
     parser.add_argument('--skip-processed', action='store_true',
                         help='処理済みファイルをスキップ（.processed.jsonで管理）')
+    parser.add_argument('--recursive', '-r', action='store_true',
+                        help='再帰的にサブディレクトリも検索（デフォルト: 直下のみ）')
     args = parser.parse_args()
 
     input_dir = Path(args.input_dir)
@@ -571,6 +573,7 @@ def main():
     logger.info(f"    不明: {unknown_dir}")
     logger.info(f"  バッチサイズ: {batch_size}")
     logger.info(f"  モード: {args.mode}")
+    logger.info(f"  再帰検索: {'有効' if args.recursive else '無効'}")
     logger.info(f"  前処理スレッド数: {args.workers}")
     logger.info(f"  デバイス: {args.device}")
     if args.dry_run:
@@ -588,9 +591,13 @@ def main():
     # ファイル収集
     logger.info(f"画像ファイルを収集中: {input_dir}")
     image_files = []
+    
+    # 再帰フラグに応じてパターンを変更
+    glob_pattern = "**/*" if args.recursive else "*"
+    
     for ext in ['.jpg', '.jpeg', '.png', '.webp', '.bmp']:
-        image_files.extend(input_dir.glob(f"**/*{ext}"))
-        image_files.extend(input_dir.glob(f"**/*{ext.upper()}"))
+        image_files.extend(input_dir.glob(f"{glob_pattern}{ext}"))
+        image_files.extend(input_dir.glob(f"{glob_pattern}{ext.upper()}"))
 
     # 重複除去（順序を保持）
     image_files = sorted(list(dict.fromkeys(image_files)))
