@@ -148,6 +148,8 @@ pause
 
 ```bash
 python batch_tagger.py <入力ディレクトリ>
+# サブディレクトリも含める場合
+python batch_tagger.py <入力ディレクトリ> -r
 ```
 
 ### オプション一覧
@@ -168,6 +170,7 @@ python batch_tagger.py <入力ディレクトリ>
 | `--device` | - | デバイス: `auto`/`gpu`/`cpu` | `auto` |
 | `--csv-output` | - | 判定結果をCSVに出力 | なし |
 | `--skip-processed` | - | 処理済みファイルをスキップ | 無効 |
+| `--recursive` | `-r` | 再帰的にサブディレクトリも検索 | 無効（直下のみ） |
 
 ### 使用例
 
@@ -290,6 +293,9 @@ python -m pip install -r requirements.txt
 ---
 
 ## バージョン
+
+**v1.0.2** (2026-01-20)
+- `--recursive` オプション追加（デフォルト動作を非再帰に変更）
 
 **v1.0.1** (2025-12-22)
 - requirements.txt バージョン更新（Python 3.12対応）

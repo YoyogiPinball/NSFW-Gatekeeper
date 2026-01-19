@@ -15,6 +15,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Released
 - GitHub で公開リポジトリとして公開（2025-12-28）
 
+## [1.0.2] - 2026-01-20
+
+### Changed
+- `batch_tagger.py`: デフォルト動作を「直下のみスキャン」に変更
+- `batch_tagger.py`: `--recursive` オプションを追加（再帰スキャン用）
+- ドキュメント更新（README, .gitignore等）
+
 ## [1.0.1] - 2025-12-22
 
 ### Changed

@@ -31,7 +31,8 @@ run_kingc.bat
 logs/
 .processed.json
 *.csv
-DEVNOTES.md
+devnote.md
+GEMINI.md
 
 # Claude Code Harness (development files)
 .claude/
